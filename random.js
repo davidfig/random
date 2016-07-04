@@ -2,8 +2,8 @@
  * @license
  * random.js <https://github.com/davidfig/random>
  * Released under MIT license <https://github.com/davidfig/random/license>
- * Author David Figatner and other contributors
- * Copyright YOPEY YOPEY LLC and other contributors
+ * Author David Figatner
+ * Copyright (c) 2016 YOPEY YOPEY LLC
  */ (function(){
 
 // current generator
