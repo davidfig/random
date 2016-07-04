@@ -318,8 +318,7 @@ var Random = {
     property: property,
     set: set,
     distribution: distribution,
-    weightedProbabilityInt: weightedProbabilityInt,
-    normRand: normRand,
+    weightedProbabilityInt: weightedProbabilityInt
 };
 
 // Add support for AMD (Asynchronous Module Definition) libraries such as require.js.
