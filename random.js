@@ -4,7 +4,7 @@
  * Released under MIT license <https://github.com/davidfig/random/license>
  * Author David Figatner
  * Copyright (c) 2016 YOPEY YOPEY LLC
- */ ;(function(){
+ */
 
 // current generator
 var generator = Math.random;
@@ -40,9 +40,9 @@ function get(ceiling, useFloat)
 
 
 // random int number [middle - range, middle + range]
-function middle(middle, range, useFloat)
+function middle(middle, delta, useFloat)
 {
-    var half = range / 2;
+    var half = delta / 2;
     return range(middle - half, middle + half, useFloat);
 }
 
@@ -335,11 +335,11 @@ if (typeof define === 'function' && define.amd)
 // Add support for CommonJS libraries such as browserify.
 if (typeof exports !== 'undefined')
 {
-    exports.Random = Random;
+    module.exports = Random;
 }
 
 // define globally in case AMD is not available or available but not used
 if (typeof window !== 'undefined')
 {
     window.Random = Random;
-}   })();
+}
