@@ -181,7 +181,7 @@ function shuffle(array)
     while (0 !== currentIndex)
     {
         // Pick a remaining element...
-        randomIndex = int(currentIndex);
+        randomIndex = get(currentIndex);
         currentIndex -= 1;
 
         // And swap it with the current element.
