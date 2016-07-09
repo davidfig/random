@@ -34,7 +34,7 @@ function get(ceiling, useFloat)
     }
     else
     {
-        return Math.round(generator() * ceiling);
+        return Math.floor(generator() * ceiling);
     }
 }
 
@@ -76,6 +76,7 @@ function middleMultiple(middle, range, count, useFloat)
 }
 
 
+// THIS DOES NOT WORK PROPERLY . . . (shoule be replaced with an algorithm from https://github.com/ckknight/random-js)
 // returns a uniform distribution random integer using the generator between [0, ceiling - 1]
 function uniform(ceiling)
 {
