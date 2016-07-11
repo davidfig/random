@@ -92,7 +92,7 @@ function sign()
 // tells you whether a random chance was achieved; defaults to 0.5
 function chance(percent)
 {
-    return generator() < percent || 0.5;
+    return generator() < (percent || 0.5);
 }
 
 // returns a random angle in radians [0 - 2 * Math.PI)
