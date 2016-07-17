@@ -366,6 +366,12 @@ function weightedProbabilityInt(min, max, target, stddev)
     }
 }
 
+// returns a random hex color (0 - 0xffffff)
+function color()
+{
+    return get(0xffffff);
+}
+
 var Random = {
     seed: seed,
     reset: reset,
@@ -384,7 +390,8 @@ var Random = {
     property: property,
     set: set,
     distribution: distribution,
-    weightedProbabilityInt: weightedProbabilityInt
+    weightedProbabilityInt: weightedProbabilityInt,
+    color: color
 };
 
 // Add support for AMD (Asynchronous Module Definition) libraries such as require.js.
