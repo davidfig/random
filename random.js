@@ -114,7 +114,7 @@ function middle(middle, delta, useFloat)
 // random int number [start, end]
 function range(start, end, useFloat)
 {
-    return get(end - start + 1, useFloat) + start;
+    return get(end - start, useFloat) + start;
 }
 
 
