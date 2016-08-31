@@ -135,7 +135,7 @@ function middleMultiple(middle, range, count, useFloat)
     var array = [];
     for (var i = 0; i < count; i++)
     {
-        array.push(plusMinus(middle, range, useFloat));
+        array.push(middle(middle, range, useFloat));
     }
     return array;
 }

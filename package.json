@@ -1,0 +1,19 @@
+{
+  "name": "@yy/random",
+  "version": "1.0.0",
+  "description": "a javascript random number API with seeded support. not cryptographically sound. useful for games",
+  "main": "random.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/davidfig/random.git"
+  },
+  "author": "david figatner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidfig/random/issues"
+  },
+  "homepage": "https://github.com/davidfig/random#readme"
+}
