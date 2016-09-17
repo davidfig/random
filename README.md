@@ -19,79 +19,232 @@ a javascript random number API with seeded support. not cryptographically sound.
 ## Installation
 include random.js in your project or add to your workflow
 
-    <script src="random.js"></script>
+    npm install yy-random
 
-## API Reference
+# API Reference
+**Kind**: global class  
 
-#### Random.seed(seed)
+* [Random](#Random)
+    * [.seed(seed)](#Random+seed)
+    * [.reset()](#Random+reset)
+    * [.get(ceiling, [useFloat])](#Random+get) ⇒ <code>number</code>
+    * [.middle(middle, delta, [useFloat])](#Random+middle) ⇒ <code>number</code>
+    * [.range(start, end, [useFloat])](#Random+range) ⇒ <code>number</code>
+    * [.rangeMultiple(start, end, count, [useFloat])](#Random+rangeMultiple) ⇒ <code>Array.&lt;number&gt;</code>
+    * [.middleMultiple(middle, range, count, [useFloat])](#Random+middleMultiple) ⇒ <code>Array.&lt;number&gt;</code>
+    * [.sign()](#Random+sign) ⇒ <code>number</code>
+    * [.chance([percent])](#Random+chance) ⇒ <code>boolean</code>
+    * [.angle()](#Random+angle)
+    * [.simple1DNoise()](#Random+simple1DNoise) ⇒ <code>object</code>
+    * [.shuffle(array)](#Random+shuffle) ⇒ <code>Array</code>
+    * [.pick(array)](#Random+pick) ⇒ <code>\*</code>
+    * [.property(obj)](#Random+property) ⇒ <code>\*</code>
+    * [.set(min, max, amount)](#Random+set)
+    * [.distribution(start, end, count, [includeStart], [includeEnd], [useFloat])](#Random+distribution)
+    * [.weightedProbabilityInt(min, max, target, stddev)](#Random+weightedProbabilityInt)
+
+<a name="Random+seed"></a>
+
+### random.seed(seed)
 changes the generator to use a seeded random function
+based on : http://stackoverflow.com/questions/521295/javascript-random-seeds
 
-#### Random.reset()
-resets the random number generator to Math.random()
+**Kind**: instance method of <code>[Random](#Random)</code>  
 
-#### Random.get(ceiling, useFloat)
-returns a random number using the generator between [0, ceiling - 1]
+| Param | Type |
+| --- | --- |
+| seed | <code>number</code> | 
 
-#### Random.middle(middle, range, useFloat)
-random int number [middle - range, middle + range]
+<a name="Random+reset"></a>
 
-#### Random.range(start, end, useFloat)
-random int number [start, end]
+### random.reset()
+resets the random number this.generator to Math.random()
 
-#### Random.rangeMultiple(start, end, count, useFloat)
+**Kind**: instance method of <code>[Random](#Random)</code>  
+<a name="Random+get"></a>
+
+### random.get(ceiling, [useFloat]) ⇒ <code>number</code>
+returns a random number using the this.generator between [0, ceiling - 1]
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| ceiling | <code>number</code> |  | 
+| [useFloat] | <code>boolean</code> | <code>false</code> | 
+
+<a name="Random+middle"></a>
+
+### random.middle(middle, delta, [useFloat]) ⇒ <code>number</code>
+random number [middle - range, middle + range]
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| middle | <code>number</code> |  | 
+| delta | <code>number</code> |  | 
+| [useFloat] | <code>boolean</code> | <code>false</code> | 
+
+<a name="Random+range"></a>
+
+### random.range(start, end, [useFloat]) ⇒ <code>number</code>
+random number [start, end]
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| start | <code>number</code> |  | 
+| end | <code>number</code> |  | 
+| [useFloat] | <code>boolean</code> | <code>false</code> | 
+
+<a name="Random+rangeMultiple"></a>
+
+### random.rangeMultiple(start, end, count, [useFloat]) ⇒ <code>Array.&lt;number&gt;</code>
 an array of random numbers between [start, end]
 
-#### Random.middleMultiple(middle, range, count, useFloat)
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| start | <code>number</code> |  | 
+| end | <code>number</code> |  | 
+| count | <code>number</code> |  | 
+| [useFloat] | <code>boolean</code> | <code>false</code> | 
+
+<a name="Random+middleMultiple"></a>
+
+### random.middleMultiple(middle, range, count, [useFloat]) ⇒ <code>Array.&lt;number&gt;</code>
 an array of random numbers between [middle - range, middle + range]
 
-#### Random.uniform(ceiling)
-returns a uniform distribution random integer using the generator between [0, ceiling - 1]
+**Kind**: instance method of <code>[Random](#Random)</code>  
 
-#### Random.sign()
+| Param | Type | Default |
+| --- | --- | --- |
+| middle | <code>number</code> |  | 
+| range | <code>number</code> |  | 
+| count | <code>number</code> |  | 
+| [useFloat] | <code>boolean</code> | <code>false</code> | 
+
+<a name="Random+sign"></a>
+
+### random.sign() ⇒ <code>number</code>
 returns random sign (either +1 or -1)
 
-#### Random.chance(percent)
-tells you whether a random chance was achieved; defaults to 0.5
+**Kind**: instance method of <code>[Random](#Random)</code>  
+<a name="Random+chance"></a>
 
-#### Random.angle()
+### random.chance([percent]) ⇒ <code>boolean</code>
+tells you whether a random chance was achieved
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [percent] | <code>number</code> | <code>0.5</code> | 
+
+<a name="Random+angle"></a>
+
+### random.angle()
 returns a random angle in radians [0 - 2 * Math.PI)
 
-#### Random.simple1DNoise()
-creates simple 1D noise generator
-usage:
-* var noise = new Random.simple1DNoise();
-* noise.getVal(n) returns the value based on n (usually incremented along an axis)
-* noise.setAmplitude(amplitude) changes amplitude of noise function
-* noise.setScale(scale) sets scale of noise function
+**Kind**: instance method of <code>[Random](#Random)</code>  
+<a name="Random+simple1DNoise"></a>
 
-#### Random.shuffle(array)
-Shuffle array and returns a copy of the shuffled array (not in place shuffling)
+### random.simple1DNoise() ⇒ <code>object</code>
+creates simple 1D noise this.generator
+from http://www.scratchapixel.com/old/lessons/3d-advanced-lessons/noise-part-1/creating-a-simple-1d-noise/
+via http://www.michaelbromley.co.uk/blog/90/simple-1d-noise-in-javascript
 
-#### Random.pick(array)
+**Kind**: instance method of <code>[Random](#Random)</code>  
+**Returns**: <code>object</code> - usage:
+     const noise = new Random.simple1DNoise();
+     noise.getVal(n); // returns the value based on n (usually incremented along an axis)
+     noise.setAmplitude(amplitude); // changes amplitude of noise function
+     noise.setScale(scale); // sets scale of noise function  
+<a name="Random+shuffle"></a>
+
+### random.shuffle(array) ⇒ <code>Array</code>
+Shuffle array from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+**Returns**: <code>Array</code> - copied and shuffled array  
+
+| Param | Type |
+| --- | --- |
+| array | <code>Array</code> | 
+
+<a name="Random+pick"></a>
+
+### random.pick(array) ⇒ <code>\*</code>
 picks a random element from an array
 
-#### Random.property(obj)
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type |
+| --- | --- |
+| array | <code>Array</code> | 
+
+<a name="Random+property"></a>
+
+### random.property(obj) ⇒ <code>\*</code>
 returns a random property from an object
+from http://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object
 
-#### Random.set(min, max, amount)
-create a random set
-* min number to include in set
-* max number to include in set
+**Kind**: instance method of <code>[Random](#Random)</code>  
 
-#### Random.distribution(start, end, count, includeStart, includeEnd, useFloat)
+| Param | Type |
+| --- | --- |
+| obj | <code>object</code> | 
+
+<a name="Random+set"></a>
+
+### random.set(min, max, amount)
+creates a random set where each entry is a value between [min, max]
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| min | <code>number</code> |  |
+| max | <code>number</code> |  |
+| amount | <code>number</code> | of numbers in set |
+|  | <code>Array.&lt;number&gt;</code> |  |
+
+<a name="Random+distribution"></a>
+
+### random.distribution(start, end, count, [includeStart], [includeEnd], [useFloat])
 returns a set of numbers with a randomly even distribution (i.e., no overlapping and filling the space)
-* start position
-* end position
-* count of non-start/end points
-* includeStart point (increases count by 1)
-* includeEnd point (increases count by 2)
 
-#### Random.weightedProbabilityInt(min, max, target, stddev)
-returns a random number based on weighted probability
-* min minimum value
-* max maximum value
-* target for average value
-* stddev standard deviation
+**Kind**: instance method of <code>[Random](#Random)</code>  
 
-## License
-MIT License (MIT)
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| start | <code>number</code> |  | position |
+| end | <code>number</code> |  | position |
+| count | <code>number</code> |  | of non-start/end points |
+| [includeStart] | <code>boolean</code> | <code>false</code> | includes start point (count++) |
+| [includeEnd] | <code>boolean</code> | <code>false</code> | includes end point (count++) |
+| [useFloat] | <code>boolean</code> | <code>false</code> |  |
+|  | <code>Array.&lt;number&gt;</code> |  |  |
+
+<a name="Random+weightedProbabilityInt"></a>
+
+### random.weightedProbabilityInt(min, max, target, stddev)
+returns a random number based on weighted probability between [min, max]
+from http://stackoverflow.com/questions/22656126/javascript-random-number-with-weighted-probability
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| min | <code>number</code> | value |
+| max | <code>number</code> | value |
+| target | <code>number</code> | for average value |
+| stddev | <code>number</code> | standard deviation |
+
+
+* * *
+
+Copyright (c) 2016 YOPEY YOPEY LLC - MIT License - Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)
