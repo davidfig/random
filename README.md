@@ -22,6 +22,8 @@ include random.js in your project or add to your workflow
     npm install yy-random
 
 # API Reference
+a javascript random number API with seeded support. not cryptographically sound. useful for games
+
 **Kind**: global class  
 
 * [Random](#Random)

@@ -1,17 +1,17 @@
 /**
- * @license
- * random.js <https://github.com/davidfig/random>
- * Released under MIT license <https://github.com/davidfig/random/license>
- * Author David Figatner
- * Copyright (c) 2016 YOPEY YOPEY LLC
+ * @file random.js
+ * @author David Figatner
+ * @license MIT
+ * @copyright YOPEY YOPEY LLC 2016
+ * {@link https://github.com/davidfig/random}
  */
 
-/** @class */
+/** a javascript random number API with seeded support. not cryptographically sound. useful for games */
 class Random
 {
     constructor()
     {
-        this.this.generator = Math.random;
+        this.generator = Math.random;
     }
 
     /**
