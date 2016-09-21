@@ -191,12 +191,14 @@ class Random
 
     //
     /**
+     * @param {number} [chance=0.5]
      * returns random sign (either +1 or -1)
      * @return {number}
      */
-    sign()
+    sign(chance)
     {
-        return this.generator() < 0.5 ? 1 : -1;
+        chance = chance || 0.5;
+        return this.generator() < chance ? 1 : -1;
     }
 
     //
@@ -216,80 +218,6 @@ class Random
     angle()
     {
         return this.get(Math.PI * 2, true);
-    }
-
-    /**
-     * creates simple 1D noise this.generator
-     * from http://www.scratchapixel.com/old/lessons/3d-advanced-lessons/noise-part-1/creating-a-simple-1d-noise/
-     * via http://www.michaelbromley.co.uk/blog/90/simple-1d-noise-in-javascript
-     * @return {object}
-     *
-     * usage:
-     *      const noise = new Random.simple1DNoise();
-     *      noise.getVal(n); // returns the value based on n (usually incremented along an axis)
-     *      noise.setAmplitude(amplitude); // changes amplitude of noise function
-     *      noise.setScale(scale); // sets scale of noise function
-     */
-    simple1DNoise()
-    {
-        const MAX_VERTICES = 256;
-        const MAX_VERTICES_MASK = MAX_VERTICES - 1;
-
-        let amplitude = 1;
-        let scale = 1;
-
-        const r = [];
-
-        for (let i = 0; i < MAX_VERTICES; i++)
-        {
-            r.push(this.generator());
-        }
-
-        /**
-         * gets a value
-         * @param {number} x
-         * @return {number}
-         */
-        const getVal = function(x)
-        {
-            const scaledX = x * scale;
-            const xFloor = Math.floor(scaledX);
-            const t = scaledX - xFloor;
-            const tRemapSmoothstep = t * t * (3 - 2 * t);
-
-            /// Modulo using &
-            const xMin = xFloor & MAX_VERTICES_MASK;
-            const xMax = (xMin + 1) & MAX_VERTICES_MASK;
-
-            const y = lerp(r[xMin], r[xMax], tRemapSmoothstep);
-
-            return y * amplitude;
-        };
-
-        /**
-        * Linear interpolation function.
-        * @param {number} a The lower integer value
-        * @param {number} b The upper integer value
-        * @param {number} t The value between the two
-        * @return {number}
-        */
-        var lerp = function(a, b, t )
-        {
-            return a * (1 - t) + b * t;
-        };
-
-        // returns the API
-        return {
-            getVal: getVal,
-            setAmplitude: function(newAmplitude)
-            {
-                amplitude = newAmplitude;
-            },
-            setScale: function(newScale)
-            {
-                scale = newScale;
-            }
-        };
     }
 
     /**
