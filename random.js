@@ -110,14 +110,18 @@ class Random
      */
     get(ceiling, useFloat)
     {
+        const negative = ceiling < 0 ? -1 : 1;
+        ceiling *= negative;
+        let result;
         if (useFloat)
         {
-            return this.generator() * ceiling;
+            result = this.generator() * ceiling;
         }
         else
         {
-            return Math.floor(this.generator() * ceiling);
+            result = Math.floor(this.generator() * ceiling);
         }
+        return result * negative;
     }
 
     /**
@@ -137,12 +141,16 @@ class Random
      * random number [start, end]
      * @param {number} start
      * @param {number} end
-     * @param {boolean} [useFloat=false]
+     * @param {boolean} [useFloat=false] if true, then range is (start, end) --i.e., not inclusive to start and end
      * @return {number}
      */
     range(start, end, useFloat)
     {
-        return this.get(end - start, useFloat) + start;
+        if (end === start)
+        {
+            return end;
+        }
+        return this.get(end - start + (useFloat ? 0 : 1), useFloat) + start;
     }
 
     /**
