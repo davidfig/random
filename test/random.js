@@ -5,6 +5,19 @@ const Random = require('../random.js');
 
 const count = 100;
 
+var a = 0;
+
+if (a)
+{
+for (let i = 0; i < 5; i++)
+{
+    console.log(Random.range(-1, 0));
+}
+
+}
+else
+{
+
 describe('Random', () => {
     describe('get()', () => {
         it('returns a random integer between 0 and 9', () => {
@@ -73,7 +86,7 @@ describe('Random', () => {
         it('returns a random number in a negative range', () => {
             for (let i = 0; i < count; i++)
             {
-                expect(Random.middle(-100, -20)).to.be.within(-120, -80);
+                expect(Random.middle(-100, 20)).to.be.within(-120, -80);
             }
         });
     });
@@ -114,5 +127,19 @@ describe('Random', () => {
                 expect(n).to.be.within(0, 3);
             }
         })
+        it('returns all negatives integers inclusively in a small range with zero', () => {
+            let finds = {};
+            for (let i = 0; i < count; i++)
+            {
+                const n = Random.range(-1, 0);
+                finds[n] = true;
+                expect(n).to.be.within(-1, 0);
+            }
+            expect(finds[-2]).to.be(undefined);
+            expect(finds[-1]).to.be.equal(true);
+            expect(finds[0]).to.be.equal(true);
+            expect(finds[1]).to.be(undefined);
+        })
     });
 });
+}

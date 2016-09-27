@@ -141,16 +141,47 @@ class Random
      * random number [start, end]
      * @param {number} start
      * @param {number} end
-     * @param {boolean} [useFloat=false] if true, then range is (start, end) --i.e., not inclusive to start and end
+     * @param {boolean} [useFloat=false] if true, then range is (start, end)--i.e., not inclusive to start and end
      * @return {number}
      */
     range(start, end, useFloat)
     {
+        // case where theres is no range
         if (end === start)
         {
             return end;
         }
-        return this.get(end - start + (useFloat ? 0 : 1), useFloat) + start;
+
+        if (useFloat)
+        {
+            return this.get(end - start, true) + start;
+        }
+        else
+        {
+            let range;
+            if (start < 0 && end > 0)
+            {
+                range = -start + end + 1;
+            }
+            else if (start === 0 && end > 0)
+            {
+                range = end + 1;
+            }
+            else if (start < 0 && end === 0)
+            {
+                range = start - 1;
+                start = 1;
+            }
+            else if (start < 0 && end < 0)
+            {
+                range = end - start - 1;
+            }
+            else
+            {
+                range = end - start + 1;
+            }
+            return Math.floor(this.generator() * range) + start;
+        }
     }
 
     /**
