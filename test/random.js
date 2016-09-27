@@ -5,19 +5,6 @@ const Random = require('../random.js');
 
 const count = 100;
 
-var a = 0;
-
-if (a)
-{
-for (let i = 0; i < 5; i++)
-{
-    console.log(Random.range(-1, 0));
-}
-
-}
-else
-{
-
 describe('Random', () => {
     describe('get()', () => {
         it('returns a random integer between 0 and 9', () => {
@@ -142,4 +129,3 @@ describe('Random', () => {
         })
     });
 });
-}
