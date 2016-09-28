@@ -125,6 +125,15 @@ class Random
     }
 
     /**
+     * returns a random integer between 0 - Number.MAX_SAFE_INTEGER
+     * @return {number}
+     */
+    getHuge()
+    {
+        return this.get(Number.MAX_SAFE_INTEGER);
+    }
+
+    /**
      * random number [middle - range, middle + range]
      * @param {number} middle
      * @param {number} delta

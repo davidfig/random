@@ -127,5 +127,11 @@ describe('Random', () => {
             expect(finds[0]).to.be.equal(true);
             expect(finds[1]).to.be(undefined);
         })
+        it('returns a huge number between 0 and MAX_SAFE_INTEGER', () => {
+            for (let i = 0; i < count; i++)
+            {
+                expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER);
+            }
+        })
     });
 });

@@ -30,14 +30,14 @@ a javascript random number API with seeded support. not cryptographically sound.
     * [.seed(seed)](#Random+seed)
     * [.reset()](#Random+reset)
     * [.get(ceiling, [useFloat])](#Random+get) ⇒ <code>number</code>
+    * [.getHuge()](#Random+getHuge) ⇒ <code>number</code>
     * [.middle(middle, delta, [useFloat])](#Random+middle) ⇒ <code>number</code>
     * [.range(start, end, [useFloat])](#Random+range) ⇒ <code>number</code>
     * [.rangeMultiple(start, end, count, [useFloat])](#Random+rangeMultiple) ⇒ <code>Array.&lt;number&gt;</code>
     * [.middleMultiple(middle, range, count, [useFloat])](#Random+middleMultiple) ⇒ <code>Array.&lt;number&gt;</code>
-    * [.sign()](#Random+sign) ⇒ <code>number</code>
+    * [.sign([chance])](#Random+sign) ⇒ <code>number</code>
     * [.chance([percent])](#Random+chance) ⇒ <code>boolean</code>
     * [.angle()](#Random+angle)
-    * [.simple1DNoise()](#Random+simple1DNoise) ⇒ <code>object</code>
     * [.shuffle(array)](#Random+shuffle) ⇒ <code>Array</code>
     * [.pick(array)](#Random+pick) ⇒ <code>\*</code>
     * [.property(obj)](#Random+property) ⇒ <code>\*</code>
@@ -75,6 +75,12 @@ returns a random number using the this.generator between [0, ceiling - 1]
 | ceiling | <code>number</code> |  | 
 | [useFloat] | <code>boolean</code> | <code>false</code> | 
 
+<a name="Random+getHuge"></a>
+
+### random.getHuge() ⇒ <code>number</code>
+returns a random integer between 0 - Number.MAX_SAFE_INTEGER
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
 <a name="Random+middle"></a>
 
 ### random.middle(middle, delta, [useFloat]) ⇒ <code>number</code>
@@ -95,11 +101,11 @@ random number [start, end]
 
 **Kind**: instance method of <code>[Random](#Random)</code>  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| start | <code>number</code> |  | 
-| end | <code>number</code> |  | 
-| [useFloat] | <code>boolean</code> | <code>false</code> | 
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| start | <code>number</code> |  |  |
+| end | <code>number</code> |  |  |
+| [useFloat] | <code>boolean</code> | <code>false</code> | if true, then range is (start, end)--i.e., not inclusive to start and end |
 
 <a name="Random+rangeMultiple"></a>
 
@@ -131,10 +137,13 @@ an array of random numbers between [middle - range, middle + range]
 
 <a name="Random+sign"></a>
 
-### random.sign() ⇒ <code>number</code>
-returns random sign (either +1 or -1)
-
+### random.sign([chance]) ⇒ <code>number</code>
 **Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [chance] | <code>number</code> | <code>0.5</code> | returns random sign (either +1 or -1) |
+
 <a name="Random+chance"></a>
 
 ### random.chance([percent]) ⇒ <code>boolean</code>
@@ -152,19 +161,6 @@ tells you whether a random chance was achieved
 returns a random angle in radians [0 - 2 * Math.PI)
 
 **Kind**: instance method of <code>[Random](#Random)</code>  
-<a name="Random+simple1DNoise"></a>
-
-### random.simple1DNoise() ⇒ <code>object</code>
-creates simple 1D noise this.generator
-from http://www.scratchapixel.com/old/lessons/3d-advanced-lessons/noise-part-1/creating-a-simple-1d-noise/
-via http://www.michaelbromley.co.uk/blog/90/simple-1d-noise-in-javascript
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-**Returns**: <code>object</code> - usage:
-     const noise = new Random.simple1DNoise();
-     noise.getVal(n); // returns the value based on n (usually incremented along an axis)
-     noise.setAmplitude(amplitude); // changes amplitude of noise function
-     noise.setScale(scale); // sets scale of noise function  
 <a name="Random+shuffle"></a>
 
 ### random.shuffle(array) ⇒ <code>Array</code>
