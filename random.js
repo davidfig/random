@@ -28,6 +28,18 @@ class Random
         };
     }
 
+    /**
+     * create a separate random generator using the seed
+     * @param {number} seed
+     * @return {object}
+     */
+    separateSeed(seed)
+    {
+        const random = new Random();
+        random.seed(seed);
+        return random;
+    }
+
     /*
     // future work to replace Math.sin seed generator with an XOR generator
     // changes the this.generator to use a seeded random based on XOR

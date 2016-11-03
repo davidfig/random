@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const expect = require('expect.js');
 const Random = require('../random.js');
@@ -83,7 +83,7 @@ describe('Random', () => {
             {
                 expect(Random.range(0, 100)).to.be.within(0, 100);
             }
-        })
+        });
         it('returns all integers inclusively in a small range with zero', () => {
             let finds = [];
             for (let i = 0; i < count; i++)
@@ -94,7 +94,7 @@ describe('Random', () => {
             expect(finds[1]).to.be.equal(true);
             expect(finds[2]).to.be.equal(true);
             expect(finds[3]).to.be(undefined);
-        })
+        });
         it('returns all integers inclusively in a small range without zero', () => {
             let finds = [];
             for (let i = 0; i < count; i++)
@@ -106,14 +106,14 @@ describe('Random', () => {
             expect(finds[2]).to.be.equal(true);
             expect(finds[3]).to.be.equal(true);
             expect(finds[4]).to.be(undefined);
-        })
+        });
         it('returns all floats inclusively in a small range with zero', () => {
             for (let i = 0; i < count; i++)
             {
                 const n = Random.range(0, 3, true);
                 expect(n).to.be.within(0, 3);
             }
-        })
+        });
         it('returns all negatives integers inclusively in a small range with zero', () => {
             let finds = {};
             for (let i = 0; i < count; i++)
@@ -126,12 +126,31 @@ describe('Random', () => {
             expect(finds[-1]).to.be.equal(true);
             expect(finds[0]).to.be.equal(true);
             expect(finds[1]).to.be(undefined);
-        })
+        });
         it('returns a huge number between 0 and MAX_SAFE_INTEGER', () => {
             for (let i = 0; i < count; i++)
             {
                 expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER);
             }
-        })
+        });
     });
+    describe('speed test', () => {
+        it('time for Random.get() with Math.random()', function() {
+            Random.reset();
+            this.timeout(100000);
+            for (let i = 0; i < 100000; i++)
+            {
+                expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER);
+            }
+        });
+        it('time for Random.get() with sin random function', function() {
+            Random.seed(1);
+            this.timeout(100000);
+            for (let i = 0; i < 100000; i++)
+            {
+                expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER);
+            }
+        });
+    });
+
 });
