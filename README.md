@@ -28,6 +28,7 @@ a javascript random number API with seeded support. not cryptographically sound.
 
 * [Random](#Random)
     * [.seed(seed)](#Random+seed)
+    * [.separateSeed(seed)](#Random+separateSeed) ⇒ <code>object</code>
     * [.reset()](#Random+reset)
     * [.get(ceiling, [useFloat])](#Random+get) ⇒ <code>number</code>
     * [.getHuge()](#Random+getHuge) ⇒ <code>number</code>
@@ -50,6 +51,17 @@ a javascript random number API with seeded support. not cryptographically sound.
 ### random.seed(seed)
 changes the generator to use a seeded random function
 based on : http://stackoverflow.com/questions/521295/javascript-random-seeds
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type |
+| --- | --- |
+| seed | <code>number</code> | 
+
+<a name="Random+separateSeed"></a>
+
+### random.separateSeed(seed) ⇒ <code>object</code>
+create a separate random generator using the seed
 
 **Kind**: instance method of <code>[Random](#Random)</code>  
 
