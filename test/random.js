@@ -152,5 +152,19 @@ describe('Random', () => {
             }
         });
     });
-
+    describe('shuffle test', () => {
+        it('shuffle array, copy=false', function() {
+            Random.reset();
+            const array = [0, 1, 2, 3, 4, 5];
+            Random.shuffle(array, false);
+            expect(array).not.eql([0, 1, 2, 3, 4, 5]);
+        });
+        it('shuffle array, copy=true', function() {
+            Random.reset();
+            const array = [0, 1, 2, 3, 4, 5];
+            const newArray = Random.shuffle(array, true);
+            expect(array).to.eql([0, 1, 2, 3, 4, 5]);
+            expect(newArray).not.eql(array);
+        });
+    });
 });

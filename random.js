@@ -281,15 +281,21 @@ class Random
     }
 
     /**
-     * Shuffle array from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+     * Shuffle array (either in place or copied)
+     * from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
      * @param {Array} array
-     * @return {Array} copied and shuffled array
+     * @param {boolean} [copy=false] whether to shuffle in place (default) or return a new shuffled array
+     * @return {Array} a shuffled array
      */
-    shuffle(array)
+    shuffle(array, copy)
     {
+        if (copy)
+        {
+            array = array.slice();
+        }
         if (array.length === 0)
         {
-            return [];
+            return array;
         }
 
         let currentIndex = array.length, temporaryValue, randomIndex;
@@ -438,6 +444,7 @@ class Random
 
     /*
      * returns a random hex color (0 - 0xffffff)
+     * this provides very bad random colors; use davidfig/color (npm yy-color) for better random colors
      * @return {number}
      */
     color()
