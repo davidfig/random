@@ -320,9 +320,19 @@ class Random
      * @param {Array} array
      * @return {*}
      */
-    pick(array)
+    pick(array, remove)
     {
-        return array[this.get(array.length)];
+        if (!remove)
+        {
+            return array[this.get(array.length)];
+        }
+        else
+        {
+            const pick = this.get(array.length);
+            const temp = array[pick];
+            array.splice(pick, 1);
+            return temp;
+        }
     }
 
     /**
