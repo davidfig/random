@@ -138,15 +138,15 @@ describe('Random', () => {
         it('time for Random.get() with Math.random()', function() {
             Random.reset();
             this.timeout(100000);
-            for (let i = 0; i < 100000; i++)
+            for (let i = 0; i < 10000; i++)
             {
                 expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER);
             }
         });
-        it('time for Random.get() with sin random function', function() {
+        it('time for Random.get() with davidbau/seedrandom/alea function', function() {
             Random.seed(1);
             this.timeout(100000);
-            for (let i = 0; i < 100000; i++)
+            for (let i = 0; i < 10000; i++)
             {
                 expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER);
             }
@@ -165,6 +165,35 @@ describe('Random', () => {
             const newArray = Random.shuffle(array, true);
             expect(array).to.eql([0, 1, 2, 3, 4, 5]);
             expect(newArray).not.eql(array);
+        });
+    });
+    describe('saved state test', () =>
+    {
+        it('using state to repeat random values', function ()
+        {
+            Random.reset();
+            Random.seed(1, { state: true });
+
+            // take 100 random values
+            for (let i = 0; i < 100; i++)
+            {
+                Random.getHuge();
+            }
+            const state = Random.save();
+
+            // save 1000 random values
+            const original = [];
+            for (let i = 0; i < 1000; i++)
+            {
+                original.push(Random.getHuge());
+            }
+            Random.restore(state);
+            const test = [];
+            for (let i = 0; i < 1000; i++)
+            {
+                test.push(Random.getHuge());
+            }
+            expect(original).to.eql(test);
         });
     });
 });

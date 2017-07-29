@@ -1,7 +1,7 @@
 {
   "name": "yy-random",
-  "version": "1.2.0",
-  "description": "a javascript random number API with seeded support. not cryptographically sound. useful for games",
+  "version": "1.5.0",
+  "description": "a javascript random number API with seeded support. uses https://github.com/davidbau/seedrandom",
   "main": "random.js",
   "scripts": {
     "test": "node_modules/.bin/mocha",
@@ -25,27 +25,37 @@
     "mocha": "^3.0.2"
   },
   "eslintConfig": {
-    "env":
-    {
-        "commonjs": true,
-        "es6": true
+    "env": {
+      "commonjs": true,
+      "es6": true
     },
-    "parserOptions": {
-    },
+    "parserOptions": {},
     "rules": {
-        "indent": ["error", 4],
-        "quotes": ["error", "single"],
-        "semi": ["error", "always"],
-        "no-undef": 1,
-        "no-unused-vars": 1
+      "indent": [
+        "error",
+        4
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "no-undef": 1,
+      "no-unused-vars": 1
     },
     "globals": {
-        "PIXI": true,
-        "document": true,
-        "window": true,
-        "debug": true,
-        "debugOne": true,
-        "console": true
+      "PIXI": true,
+      "document": true,
+      "window": true,
+      "debug": true,
+      "debugOne": true,
+      "console": true
     }
+  },
+  "dependencies": {
+    "seedrandom": "^2.4.3"
   }
 }

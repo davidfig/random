@@ -6,6 +6,8 @@
  * {@link https://github.com/davidfig/random}
  */
 
+const seedrandom = require('seedrandom');
+
 /** a javascript random number API with seeded support. not cryptographically sound. useful for games */
 class Random
 {
@@ -15,11 +17,46 @@ class Random
     }
 
     /**
-     * changes the generator to use a seeded random function
+     * generates a seeded number
+     * @param {number} seed
+     * @param {object} [options]
+     * @param {string} [PRNG="alea"] - name of algorithm, see https://github.com/davidbau/seedrandom
+     * @param {boolean} [save=true] 
+     */
+    seed(seed, options)
+    {
+        options = options || {};
+        this.generator = seedrandom[options.PRNG || 'alea'](seed, { state: options.state });
+        this.options = options;
+    }
+
+    /**
+     * saves the state of the random generator ()
+     * @returns {number} state
+     */
+    save()
+    {
+        if (this.generator !== Math.random)
+        {
+            return this.generator.state();
+        }
+    }
+
+    restore(state)
+    {
+        if (this.generator !== Math.random)
+        {
+            this.generator = seedrandom[this.options.PRNG || 'alea']('', { state });
+        }
+    }
+
+    /**
+     * changes the generator to use the old Math.sin-based random function
      * based on : http://stackoverflow.com/questions/521295/javascript-random-seeds
+     * (deprecated) Use only for compatibility purposes
      * @param {number} seed
      */
-    seed(seed)
+    seedOld(seed)
     {
         this.generator = function()
         {

@@ -27,7 +27,9 @@ a javascript random number API with seeded support. not cryptographically sound.
 **Kind**: global class  
 
 * [Random](#Random)
-    * [.seed(seed)](#Random+seed)
+    * [.seed(seed, [options], [PRNG], [save])](#Random+seed)
+    * [.save()](#Random+save) ⇒ <code>number</code>
+    * [.seedOld(seed)](#Random+seedOld)
     * [.separateSeed(seed)](#Random+separateSeed) ⇒ <code>object</code>
     * [.reset()](#Random+reset)
     * [.get(ceiling, [useFloat])](#Random+get) ⇒ <code>number</code>
@@ -39,7 +41,7 @@ a javascript random number API with seeded support. not cryptographically sound.
     * [.sign([chance])](#Random+sign) ⇒ <code>number</code>
     * [.chance([percent])](#Random+chance) ⇒ <code>boolean</code>
     * [.angle()](#Random+angle)
-    * [.shuffle(array)](#Random+shuffle) ⇒ <code>Array</code>
+    * [.shuffle(array, [copy])](#Random+shuffle) ⇒ <code>Array</code>
     * [.pick(array)](#Random+pick) ⇒ <code>\*</code>
     * [.property(obj)](#Random+property) ⇒ <code>\*</code>
     * [.set(min, max, amount)](#Random+set)
@@ -48,9 +50,31 @@ a javascript random number API with seeded support. not cryptographically sound.
 
 <a name="Random+seed"></a>
 
-### random.seed(seed)
-changes the generator to use a seeded random function
+### random.seed(seed, [options], [PRNG], [save])
+generates a seeded number
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| seed | <code>number</code> |  |  |
+| [options] | <code>object</code> |  |  |
+| [PRNG] | <code>string</code> | <code>&quot;\&quot;alea\&quot;&quot;</code> | name of algorithm, see https://github.com/davidbau/seedrandom |
+| [save] | <code>boolean</code> | <code>true</code> |  |
+
+<a name="Random+save"></a>
+
+### random.save() ⇒ <code>number</code>
+saves the state of the random generator ()
+
+**Kind**: instance method of <code>[Random](#Random)</code>  
+**Returns**: <code>number</code> - state  
+<a name="Random+seedOld"></a>
+
+### random.seedOld(seed)
+changes the generator to use the old Math.sin-based random function
 based on : http://stackoverflow.com/questions/521295/javascript-random-seeds
+(deprecated) Use only for compatibility purposes
 
 **Kind**: instance method of <code>[Random](#Random)</code>  
 
@@ -175,15 +199,17 @@ returns a random angle in radians [0 - 2 * Math.PI)
 **Kind**: instance method of <code>[Random](#Random)</code>  
 <a name="Random+shuffle"></a>
 
-### random.shuffle(array) ⇒ <code>Array</code>
-Shuffle array from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+### random.shuffle(array, [copy]) ⇒ <code>Array</code>
+Shuffle array (either in place or copied)
+from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 
 **Kind**: instance method of <code>[Random](#Random)</code>  
-**Returns**: <code>Array</code> - copied and shuffled array  
+**Returns**: <code>Array</code> - a shuffled array  
 
-| Param | Type |
-| --- | --- |
-| array | <code>Array</code> | 
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| array | <code>Array</code> |  |  |
+| [copy] | <code>boolean</code> | <code>false</code> | whether to shuffle in place (default) or return a new shuffled array |
 
 <a name="Random+pick"></a>
 
