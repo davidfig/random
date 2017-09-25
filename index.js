@@ -1,19 +1,16 @@
-/**
- * @file random.js
- * @author David Figatner
- * @license MIT
- * @copyright YOPEY YOPEY LLC 2016
- * {@link https://github.com/davidfig/random}
- */
+// yy-random
+// by David Figatner
+// MIT license
+// copyright YOPEY YOPEY LLC 2016-17
+// https://github.com/davidfig/random
 
-const seedrandom = require('seedrandom');
+const seedrandom = require('seedrandom')
 
-/** a javascript random number API with seeded support. not cryptographically sound. useful for games */
 class Random
 {
     constructor()
     {
-        this.generator = Math.random;
+        this.generator = Math.random
     }
 
     /**
@@ -21,33 +18,35 @@ class Random
      * @param {number} seed
      * @param {object} [options]
      * @param {string} [PRNG="alea"] - name of algorithm, see https://github.com/davidbau/seedrandom
-     * @param {boolean} [save=true] 
+     * @param {boolean} [save=true]
      */
     seed(seed, options)
     {
-        options = options || {};
-        this.generator = seedrandom[options.PRNG || 'alea'](seed, { state: options.state });
-        this.options = options;
+        options = options || {}
+        this.generator = seedrandom[options.PRNG || 'alea'](seed, { state: options.state })
+        this.options = options
     }
 
     /**
-     * saves the state of the random generator ()
+     * saves the state of the random generator
+     * can only be used after Random.seed() is called
      * @returns {number} state
      */
     save()
     {
         if (this.generator !== Math.random)
         {
-            return this.generator.state();
+            return this.generator.state()
         }
     }
 
+    /**
+     * restores the state of the random generator
+     * @param {number} state
+     */
     restore(state)
     {
-        if (this.generator !== Math.random)
-        {
-            this.generator = seedrandom[this.options.PRNG || 'alea']('', { state });
-        }
+        this.generator = seedrandom[this.options.PRNG || 'alea']('', { state })
     }
 
     /**
@@ -60,9 +59,9 @@ class Random
     {
         this.generator = function()
         {
-            const x = Math.sin(seed++) * 10000;
-            return x - Math.floor(x);
-        };
+            const x = Math.sin(seed++) * 10000
+            return x - Math.floor(x)
+        }
     }
 
     /**
@@ -72,83 +71,17 @@ class Random
      */
     separateSeed(seed)
     {
-        const random = new Random();
-        random.seed(seed);
-        return random;
+        const random = new Random()
+        random.seed(seed)
+        return random
     }
-
-    /*
-    // future work to replace Math.sin seed generator with an XOR generator
-    // changes the this.generator to use a seeded random based on XOR
-    // see http://baagoe.com/en/RandomMusings/javascript/ (https://web.archive.org/web/20101106000458/http://baagoe.com/en/RandomMusings/javascript/)
-    // as seen here: http://jsdo.it/akm2/amk0
-    seedXORshift(seed)
-    {
-        mash(data)
-        {
-            data = data.toString();
-            var n = 0xefc8249d;
-            for (var i = 0; i < data.length; i++)
-            {
-                n += data.charCodeAt(i);
-                var h = 0.02519603282416938 * n;
-                n = h >>> 0;
-                h -= n;
-                h *= n;
-                n = h >>> 0;
-                h -= n;
-                n += h * 0x100000000;
-            }
-            return (n >>> 0) * 2.3283064365386963e-10;
-        }
-
-        this.generator = function()
-        {
-            var self = this;
-            var seeds = (arguments.length) ? Array.prototype.slice.call(arguments) : [new Date().getTime()];
-
-            var x = 123456789;
-            var y = 362436069;
-            var z = 521288629;
-            var w = 88675123;
-            var v = 886756453;
-
-            self.uint32 = function()
-            {
-                var t = (x ^ (x >>> 7)) >>> 0;
-                x = y;
-                y = z;
-                z = w;
-                w = v;
-                v = (v ^ (v << 6)) ^ (t ^ (t << 13)) >>> 0;
-                return ((y + y + 1) * v) >>> 0;
-            };
-
-            self.random = function() {
-                return self.uint32() * 2.3283064365386963e-10;
-            };
-
-            self.fract53 = function() {
-                return self.random() + (self.uint32() & 0x1fffff) * 1.1102230246251565e-16;
-            };
-
-            for (var i = 0, len = seeds.length, seed; i < len; i++) {
-                seed = seeds[i];
-                x ^= mash(seed) * 0x100000000;
-                y ^= mash(seed) * 0x100000000;
-                z ^= mash(seed) * 0x100000000;
-                v ^= mash(seed) * 0x100000000;
-                w ^= mash(seed) * 0x100000000;
-            }
-    }
-    */
 
     /**
      * resets the random number this.generator to Math.random()
      */
     reset()
     {
-        this.generator = Math.random;
+        this.generator = Math.random
     }
 
     /**
@@ -159,18 +92,18 @@ class Random
      */
     get(ceiling, useFloat)
     {
-        const negative = ceiling < 0 ? -1 : 1;
-        ceiling *= negative;
-        let result;
+        const negative = ceiling < 0 ? -1 : 1
+        ceiling *= negative
+        let result
         if (useFloat)
         {
-            result = this.generator() * ceiling;
+            result = this.generator() * ceiling
         }
         else
         {
-            result = Math.floor(this.generator() * ceiling);
+            result = Math.floor(this.generator() * ceiling)
         }
-        return result * negative;
+        return result * negative
     }
 
     /**
@@ -179,7 +112,7 @@ class Random
      */
     getHuge()
     {
-        return this.get(Number.MAX_SAFE_INTEGER);
+        return this.get(Number.MAX_SAFE_INTEGER)
     }
 
     /**
@@ -191,8 +124,8 @@ class Random
      */
     middle(middle, delta, useFloat)
     {
-        const half = delta / 2;
-        return this.range(middle - half, middle + half, useFloat);
+        const half = delta / 2
+        return this.range(middle - half, middle + half, useFloat)
     }
 
     /**
@@ -204,41 +137,41 @@ class Random
      */
     range(start, end, useFloat)
     {
-        // case where theres is no range
+        // case where there is no range
         if (end === start)
         {
-            return end;
+            return end
         }
 
         if (useFloat)
         {
-            return this.get(end - start, true) + start;
+            return this.get(end - start, true) + start
         }
         else
         {
-            let range;
+            let range
             if (start < 0 && end > 0)
             {
-                range = -start + end + 1;
+                range = -start + end + 1
             }
             else if (start === 0 && end > 0)
             {
-                range = end + 1;
+                range = end + 1
             }
             else if (start < 0 && end === 0)
             {
-                range = start - 1;
-                start = 1;
+                range = start - 1
+                start = 1
             }
             else if (start < 0 && end < 0)
             {
-                range = end - start - 1;
+                range = end - start - 1
             }
             else
             {
-                range = end - start + 1;
+                range = end - start + 1
             }
-            return Math.floor(this.generator() * range) + start;
+            return Math.floor(this.generator() * range) + start
         }
     }
 
@@ -252,12 +185,12 @@ class Random
      */
     rangeMultiple(start, end, count, useFloat)
     {
-        var array = [];
-        for (var i = 0; i < count; i++)
+        var array = []
+        for (let i = 0; i < count; i++)
         {
-            array.push(this.range(start, end, useFloat));
+            array.push(this.range(start, end, useFloat))
         }
-        return array;
+        return array
     }
 
     /**
@@ -270,23 +203,14 @@ class Random
      */
     middleMultiple(middle, range, count, useFloat)
     {
-        const array = [];
+        const array = []
         for (let i = 0; i < count; i++)
         {
-            array.push(middle(middle, range, useFloat));
+            array.push(middle(middle, range, useFloat))
         }
-        return array;
+        return array
     }
 
-
-    // THIS DOES NOT WORK PROPERLY . . . (shoule be replaced with an algorithm from https://github.com/ckknight/random-js)
-    // returns a uniform distribution random integer using the this.generator between [0, ceiling - 1]
-    // uniform(ceiling)
-    // {
-    //     return Math.floor(this.generator() * ceiling);
-    // }
-
-    //
     /**
      * @param {number} [chance=0.5]
      * returns random sign (either +1 or -1)
@@ -294,11 +218,10 @@ class Random
      */
     sign(chance)
     {
-        chance = chance || 0.5;
-        return this.generator() < chance ? 1 : -1;
+        chance = chance || 0.5
+        return this.generator() < chance ? 1 : -1
     }
 
-    //
     /**
      * tells you whether a random chance was achieved
      * @param {number} [percent=0.5]
@@ -306,7 +229,7 @@ class Random
      */
     chance(percent)
     {
-        return this.generator() < (percent || 0.5);
+        return this.generator() < (percent || 0.5)
     }
 
     /**
@@ -314,7 +237,7 @@ class Random
      */
     angle()
     {
-        return this.get(Math.PI * 2, true);
+        return this.get(Math.PI * 2, true)
     }
 
     /**
@@ -328,28 +251,28 @@ class Random
     {
         if (copy)
         {
-            array = array.slice();
+            array = array.slice()
         }
         if (array.length === 0)
         {
-            return array;
+            return array
         }
 
-        let currentIndex = array.length, temporaryValue, randomIndex;
+        let currentIndex = array.length, temporaryValue, randomIndex
 
         // While there remain elements to shuffle...
         while (0 !== currentIndex)
         {
             // Pick a remaining element...
-            randomIndex = this.get(currentIndex);
-            currentIndex -= 1;
+            randomIndex = this.get(currentIndex)
+            currentIndex -= 1
 
             // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
+            temporaryValue = array[currentIndex]
+            array[currentIndex] = array[randomIndex]
+            array[randomIndex] = temporaryValue
         }
-        return array;
+        return array
     }
 
     /**
@@ -361,14 +284,14 @@ class Random
     {
         if (!remove)
         {
-            return array[this.get(array.length)];
+            return array[this.get(array.length)]
         }
         else
         {
-            const pick = this.get(array.length);
-            const temp = array[pick];
-            array.splice(pick, 1);
-            return temp;
+            const pick = this.get(array.length)
+            const temp = array[pick]
+            array.splice(pick, 1)
+            return temp
         }
     }
 
@@ -380,16 +303,16 @@ class Random
      */
     property(obj)
     {
-        var result;
-        var count = 0;
+        var result
+        var count = 0
         for (var prop in obj)
         {
             if (this.chance(1 / ++count))
             {
-                result = prop;
+                result = prop
             }
         }
-        return result;
+        return result
     }
 
     /**
@@ -401,19 +324,19 @@ class Random
      */
     set(min, max, amount)
     {
-        var set = [], all = [], i;
+        var set = [], all = [], i
         for (i = min; i < max; i++)
         {
-            all.push(i);
+            all.push(i)
         }
 
         for (i = 0; i < amount; i++)
         {
-            var found = this.get(all.length);
-            set.push(all[found]);
-            all.splice(found, 1);
+            var found = this.get(all.length)
+            set.push(all[found])
+            all.splice(found, 1)
         }
-        return set;
+        return set
     }
 
 
@@ -429,23 +352,23 @@ class Random
      */
     distribution(start, end, count, includeStart, includeEnd, useFloat)
     {
-        var interval = Math.floor((end - start) / count);
-        var halfInterval = interval / 2;
-        var quarterInterval = interval / 4;
-        var set = [];
+        var interval = Math.floor((end - start) / count)
+        var halfInterval = interval / 2
+        var quarterInterval = interval / 4
+        var set = []
         if (includeStart)
         {
-            set.push(start);
+            set.push(start)
         }
         for (var i = 0; i < count; i++)
         {
-            set.push(start + i * interval + halfInterval + this.range(-quarterInterval, quarterInterval, useFloat));
+            set.push(start + i * interval + halfInterval + this.range(-quarterInterval, quarterInterval, useFloat))
         }
         if (includeEnd)
         {
-            set.push(end);
+            set.push(end)
         }
-        return set;
+        return set
     }
 
     /**
@@ -460,44 +383,43 @@ class Random
     {
         function normRand()
         {
-            let x1, x2, rad;
+            let x1, x2, rad
             do
             {
-                x1 = 2 * this.get(1, true) - 1;
-                x2 = 2 * this.get(1, true) - 1;
-                rad = x1 * x1 + x2 * x2;
-            } while (rad >= 1 || rad === 0);
-            const c = Math.sqrt(-2 * Math.log(rad) / rad);
-            return x1 * c;
+                x1 = 2 * this.get(1, true) - 1
+                x2 = 2 * this.get(1, true) - 1
+                rad = x1 * x1 + x2 * x2
+            } while (rad >= 1 || rad === 0)
+            const c = Math.sqrt(-2 * Math.log(rad) / rad)
+            return x1 * c
         }
 
-        stddev = stddev || 1;
+        stddev = stddev || 1
         if (Math.random() < 0.81546)
         {
             while (true)
             {
-                const sample = ((normRand() * stddev) + target);
+                const sample = ((normRand() * stddev) + target)
                 if (sample >= min && sample <= max)
                 {
-                    return sample;
+                    return sample
                 }
             }
         }
         else
         {
-            return this.range(min, max);
+            return this.range(min, max)
         }
     }
 
     /*
      * returns a random hex color (0 - 0xffffff)
-     * this provides very bad random colors; use davidfig/color (npm yy-color) for better random colors
      * @return {number}
      */
     color()
     {
-        return this.get(0xffffff);
+        return this.get(0xffffff)
     }
 }
 
-module.exports = new Random();
+module.exports = new Random()

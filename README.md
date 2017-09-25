@@ -1,286 +1,198 @@
-## random.js
-a javascript random number API with seeded support. not cryptographically sound. useful for games
+## yy-random
+a javascript random number API with seeded support. useful for games
 
 ## Code Example
 
+    const Random = require('yy-random')
+
     // returns a random integer from 0 - 9
-    Random.get(10);
+    Random.get(10)
 
     // returns a random float for 0 - 2
-    Random.get(2, true);
+    Random.get(2, true)
 
     // changes the generator from Math.random() to a seeded random function
     Random.seed(100)
 
-    // returns a random integer from 5 - 20
-    // this will return the same number each time
-    Random.range(5, 20) returns a random integer from 5 - 20
+    // returns a random integer between 5 - 20 (including 5 and 20)
+    // this will return the same number each time because of the Random.seed(100) call
+    Random.range(5, 20) 
 
 ## Installation
-include random.js in your project or add to your workflow
-
-    npm install yy-random
-
-# API Reference
-a javascript random number API with seeded support. not cryptographically sound. useful for games
-
-**Kind**: global class  
-
-* [Random](#Random)
-    * [.seed(seed, [options], [PRNG], [save])](#Random+seed)
-    * [.save()](#Random+save) ⇒ <code>number</code>
-    * [.seedOld(seed)](#Random+seedOld)
-    * [.separateSeed(seed)](#Random+separateSeed) ⇒ <code>object</code>
-    * [.reset()](#Random+reset)
-    * [.get(ceiling, [useFloat])](#Random+get) ⇒ <code>number</code>
-    * [.getHuge()](#Random+getHuge) ⇒ <code>number</code>
-    * [.middle(middle, delta, [useFloat])](#Random+middle) ⇒ <code>number</code>
-    * [.range(start, end, [useFloat])](#Random+range) ⇒ <code>number</code>
-    * [.rangeMultiple(start, end, count, [useFloat])](#Random+rangeMultiple) ⇒ <code>Array.&lt;number&gt;</code>
-    * [.middleMultiple(middle, range, count, [useFloat])](#Random+middleMultiple) ⇒ <code>Array.&lt;number&gt;</code>
-    * [.sign([chance])](#Random+sign) ⇒ <code>number</code>
-    * [.chance([percent])](#Random+chance) ⇒ <code>boolean</code>
-    * [.angle()](#Random+angle)
-    * [.shuffle(array, [copy])](#Random+shuffle) ⇒ <code>Array</code>
-    * [.pick(array)](#Random+pick) ⇒ <code>\*</code>
-    * [.property(obj)](#Random+property) ⇒ <code>\*</code>
-    * [.set(min, max, amount)](#Random+set)
-    * [.distribution(start, end, count, [includeStart], [includeEnd], [useFloat])](#Random+distribution)
-    * [.weightedProbabilityInt(min, max, target, stddev)](#Random+weightedProbabilityInt)
-
-<a name="Random+seed"></a>
-
-### random.seed(seed, [options], [PRNG], [save])
-generates a seeded number
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| seed | <code>number</code> |  |  |
-| [options] | <code>object</code> |  |  |
-| [PRNG] | <code>string</code> | <code>&quot;\&quot;alea\&quot;&quot;</code> | name of algorithm, see https://github.com/davidbau/seedrandom |
-| [save] | <code>boolean</code> | <code>true</code> |  |
-
-<a name="Random+save"></a>
-
-### random.save() ⇒ <code>number</code>
-saves the state of the random generator ()
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-**Returns**: <code>number</code> - state  
-<a name="Random+seedOld"></a>
-
-### random.seedOld(seed)
-changes the generator to use the old Math.sin-based random function
-based on : http://stackoverflow.com/questions/521295/javascript-random-seeds
-(deprecated) Use only for compatibility purposes
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type |
-| --- | --- |
-| seed | <code>number</code> | 
-
-<a name="Random+separateSeed"></a>
-
-### random.separateSeed(seed) ⇒ <code>object</code>
-create a separate random generator using the seed
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type |
-| --- | --- |
-| seed | <code>number</code> | 
-
-<a name="Random+reset"></a>
-
-### random.reset()
-resets the random number this.generator to Math.random()
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-<a name="Random+get"></a>
-
-### random.get(ceiling, [useFloat]) ⇒ <code>number</code>
-returns a random number using the this.generator between [0, ceiling - 1]
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default |
-| --- | --- | --- |
-| ceiling | <code>number</code> |  | 
-| [useFloat] | <code>boolean</code> | <code>false</code> | 
-
-<a name="Random+getHuge"></a>
-
-### random.getHuge() ⇒ <code>number</code>
-returns a random integer between 0 - Number.MAX_SAFE_INTEGER
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-<a name="Random+middle"></a>
-
-### random.middle(middle, delta, [useFloat]) ⇒ <code>number</code>
-random number [middle - range, middle + range]
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default |
-| --- | --- | --- |
-| middle | <code>number</code> |  | 
-| delta | <code>number</code> |  | 
-| [useFloat] | <code>boolean</code> | <code>false</code> | 
-
-<a name="Random+range"></a>
-
-### random.range(start, end, [useFloat]) ⇒ <code>number</code>
-random number [start, end]
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| start | <code>number</code> |  |  |
-| end | <code>number</code> |  |  |
-| [useFloat] | <code>boolean</code> | <code>false</code> | if true, then range is (start, end)--i.e., not inclusive to start and end |
-
-<a name="Random+rangeMultiple"></a>
-
-### random.rangeMultiple(start, end, count, [useFloat]) ⇒ <code>Array.&lt;number&gt;</code>
-an array of random numbers between [start, end]
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default |
-| --- | --- | --- |
-| start | <code>number</code> |  | 
-| end | <code>number</code> |  | 
-| count | <code>number</code> |  | 
-| [useFloat] | <code>boolean</code> | <code>false</code> | 
-
-<a name="Random+middleMultiple"></a>
-
-### random.middleMultiple(middle, range, count, [useFloat]) ⇒ <code>Array.&lt;number&gt;</code>
-an array of random numbers between [middle - range, middle + range]
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default |
-| --- | --- | --- |
-| middle | <code>number</code> |  | 
-| range | <code>number</code> |  | 
-| count | <code>number</code> |  | 
-| [useFloat] | <code>boolean</code> | <code>false</code> | 
-
-<a name="Random+sign"></a>
-
-### random.sign([chance]) ⇒ <code>number</code>
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [chance] | <code>number</code> | <code>0.5</code> | returns random sign (either +1 or -1) |
-
-<a name="Random+chance"></a>
-
-### random.chance([percent]) ⇒ <code>boolean</code>
-tells you whether a random chance was achieved
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default |
-| --- | --- | --- |
-| [percent] | <code>number</code> | <code>0.5</code> | 
-
-<a name="Random+angle"></a>
-
-### random.angle()
-returns a random angle in radians [0 - 2 * Math.PI)
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-<a name="Random+shuffle"></a>
-
-### random.shuffle(array, [copy]) ⇒ <code>Array</code>
-Shuffle array (either in place or copied)
-from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-**Returns**: <code>Array</code> - a shuffled array  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| array | <code>Array</code> |  |  |
-| [copy] | <code>boolean</code> | <code>false</code> | whether to shuffle in place (default) or return a new shuffled array |
-
-<a name="Random+pick"></a>
-
-### random.pick(array) ⇒ <code>\*</code>
-picks a random element from an array
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type |
-| --- | --- |
-| array | <code>Array</code> | 
-
-<a name="Random+property"></a>
-
-### random.property(obj) ⇒ <code>\*</code>
-returns a random property from an object
-from http://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type |
-| --- | --- |
-| obj | <code>object</code> | 
-
-<a name="Random+set"></a>
-
-### random.set(min, max, amount)
-creates a random set where each entry is a value between [min, max]
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| min | <code>number</code> |  |
-| max | <code>number</code> |  |
-| amount | <code>number</code> | of numbers in set |
-|  | <code>Array.&lt;number&gt;</code> |  |
-
-<a name="Random+distribution"></a>
-
-### random.distribution(start, end, count, [includeStart], [includeEnd], [useFloat])
-returns a set of numbers with a randomly even distribution (i.e., no overlapping and filling the space)
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| start | <code>number</code> |  | position |
-| end | <code>number</code> |  | position |
-| count | <code>number</code> |  | of non-start/end points |
-| [includeStart] | <code>boolean</code> | <code>false</code> | includes start point (count++) |
-| [includeEnd] | <code>boolean</code> | <code>false</code> | includes end point (count++) |
-| [useFloat] | <code>boolean</code> | <code>false</code> |  |
-|  | <code>Array.&lt;number&gt;</code> |  |  |
-
-<a name="Random+weightedProbabilityInt"></a>
-
-### random.weightedProbabilityInt(min, max, target, stddev)
-returns a random number based on weighted probability between [min, max]
-from http://stackoverflow.com/questions/22656126/javascript-random-number-with-weighted-probability
-
-**Kind**: instance method of <code>[Random](#Random)</code>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| min | <code>number</code> | value |
-| max | <code>number</code> | value |
-| target | <code>number</code> | for average value |
-| stddev | <code>number</code> | standard deviation |
-
-
-* * *
-
-Copyright (c) 2016 YOPEY YOPEY LLC - MIT License - Documented by [jsdoc-to-markdown](https://github.com/75lb/jsdoc-to-markdown)
+include yy-random in your project or add to your workflow
+
+    npm i yy-random
+
+## API
+```
+    /**
+     * generates a seeded number
+     * @param {number} seed
+     * @param {object} [options]
+     * @param {string} [PRNG="alea"] - name of algorithm, see https://github.com/davidbau/seedrandom
+     * @param {boolean} [save=true]
+     */
+    seed(seed, options)
+
+    /**
+     * saves the state of the random generator
+     * can only be used after Random.seed() is called
+     * @returns {number} state
+     */
+    save()
+
+    /**
+     * restores the state of the random generator
+     * @param {number} state
+     */
+    restore(state)
+
+    /**
+     * changes the generator to use the old Math.sin-based random function
+     * based on : http://stackoverflow.com/questions/521295/javascript-random-seeds
+     * (deprecated) Use only for compatibility purposes
+     * @param {number} seed
+     */
+    seedOld(seed)
+
+    /**
+     * create a separate random generator using the seed
+     * @param {number} seed
+     * @return {object}
+     */
+    separateSeed(seed)
+
+    /**
+     * resets the random number this.generator to Math.random()
+     */
+    reset()
+
+    /**
+     * returns a random number using the this.generator between [0, ceiling - 1]
+     * @param {number} ceiling
+     * @param {boolean} [useFloat=false]
+     * @return {number}
+     */
+    get(ceiling, useFloat)
+
+    /**
+     * returns a random integer between 0 - Number.MAX_SAFE_INTEGER
+     * @return {number}
+     */
+    getHuge()
+
+    /**
+     * random number [middle - range, middle + range]
+     * @param {number} middle
+     * @param {number} delta
+     * @param {boolean} [useFloat=false]
+     * @return {number}
+     */
+    middle(middle, delta, useFloat)
+
+    /**
+     * random number [start, end]
+     * @param {number} start
+     * @param {number} end
+     * @param {boolean} [useFloat=false] if true, then range is (start, end)--i.e., not inclusive to start and end
+     * @return {number}
+     */
+    range(start, end, useFloat)
+
+    /**
+     * an array of random numbers between [start, end]
+     * @param {number} start
+     * @param {number} end
+     * @param {number} count
+     * @param {boolean} [useFloat=false]
+     * @return {number[]}
+     */
+    rangeMultiple(start, end, count, useFloat)
+
+    /**
+     * an array of random numbers between [middle - range, middle + range]
+     * @param {number} middle
+     * @param {number} range
+     * @param {number} count
+     * @param {boolean} [useFloat=false]
+     * @return {number[]}
+     */
+    middleMultiple(middle, range, count, useFloat)
+
+    /**
+     * @param {number} [chance=0.5]
+     * returns random sign (either +1 or -1)
+     * @return {number}
+     */
+    sign(chance)
+
+    /**
+     * tells you whether a random chance was achieved
+     * @param {number} [percent=0.5]
+     * @return {boolean}
+     */
+    chance(percent)
+
+    /**
+     * returns a random angle in radians [0 - 2 * Math.PI)
+     */
+    angle()
+
+    /**
+     * Shuffle array (either in place or copied)
+     * from http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+     * @param {Array} array
+     * @param {boolean} [copy=false] whether to shuffle in place (default) or return a new shuffled array
+     * @return {Array} a shuffled array
+     */
+    shuffle(array, copy)
+
+    /**
+     * picks a random element from an array
+     * @param {Array} array
+     * @return {*}
+     */
+    pick(array, remove)
+
+    /**
+     * returns a random property from an object
+     * from http://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object
+     * @param {object} obj
+     * @return {*}
+     */
+    property(obj)
+
+    /**
+     * creates a random set where each entry is a value between [min, max]
+     * @param {number} min
+     * @param {number} max
+     * @param {number} amount of numbers in set
+     * @param {number[]}
+     */
+    set(min, max, amount)
+
+    /**
+     * returns a set of numbers with a randomly even distribution (i.e., no overlapping and filling the space)
+     * @param {number} start position
+     * @param {number} end position
+     * @param {number} count of non-start/end points
+     * @param {boolean} [includeStart=false] includes start point (count++)
+     * @param {boolean} [includeEnd=false] includes end point (count++)
+     * @param {boolean} [useFloat=false]
+     * @param {number[]}
+     */
+    distribution(start, end, count, includeStart, includeEnd, useFloat)
+
+    /**
+     * returns a random number based on weighted probability between [min, max]
+     * from http://stackoverflow.com/questions/22656126/javascript-random-number-with-weighted-probability
+     * @param {number} min value
+     * @param {number} max value
+     * @param {number} target for average value
+     * @param {number} stddev - standard deviation
+     */
+    weightedProbabilityInt(min, max, target, stddev)
+```
+## License  
+MIT License  
+(c) 2017 [YOPEY YOPEY LLC](https://yopeyopey.com/) by [David Figatner](https://twitter.com/yopey_yopey/)
