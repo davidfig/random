@@ -1,11 +1,13 @@
 {
   "name": "yy-random",
-  "version": "1.6.0",
+  "version": "1.7.1",
   "description": "a javascript random number API with seeded support. uses https://github.com/davidbau/seedrandom",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha",
-    "docs": "markdown-api README.md index.js"
+    "docs": "markdown-api README.md index.js",
+    "transpile": "babel random.js -o index.js --source-maps inline",
+    "prepublishOnly": "npm run transpile && npm run docs"
   },
   "repository": {
     "type": "git",
@@ -18,10 +20,9 @@
   },
   "homepage": "https://github.com/davidfig/random#readme",
   "devDependencies": {
-    "babel": "^6.5.2",
-    "babel-cli": "^6.14.0",
+    "babel-preset-env": "^1.7.0",
     "expect.js": "^0.3.1",
-    "mocha": "^3.0.2"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "seedrandom": "^2.4.3"
