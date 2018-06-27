@@ -18,7 +18,7 @@ class Random
      * @param {number} seed
      * @param {object} [options]
      * @param {string} [PRNG="alea"] - name of algorithm, see https://github.com/davidbau/seedrandom
-     * @param {boolean} [save=true]
+     * @param {(boolean|string)} [state] - can include the state returned from save()
      */
     seed(seed, options)
     {
@@ -29,7 +29,7 @@ class Random
 
     /**
      * saves the state of the random generator
-     * can only be used after Random.seed() is called
+     * can only be used after Random.seed() is called with options.state = true
      * @returns {number} state
      */
     save()
