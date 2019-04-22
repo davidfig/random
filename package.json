@@ -1,7 +1,7 @@
 {
   "name": "yy-random",
-  "version": "1.7.3",
-  "description": "a javascript random number API with seeded support. uses https://github.com/davidbau/seedrandom",
+  "version": "1.8.0",
+  "description": "a javascript random number API with seeded number support",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha",
@@ -22,9 +22,9 @@
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "expect.js": "^0.3.1",
-    "mocha": "^5.2.0"
+    "mocha": "^6.1.4"
   },
   "dependencies": {
-    "seedrandom": "^2.4.3"
+    "seedrandom": "^3.0.1"
   }
 }

@@ -1,5 +1,5 @@
 ## yy-random
-a javascript random number API with seeded support. useful for games
+yet another javascript random number API with seeded number support
 
 ## Code Example
 
@@ -22,6 +22,9 @@ a javascript random number API with seeded support. useful for games
 include yy-random in your project or add to your workflow
 
     npm i yy-random
+
+## Rationale
+I use lots of random numbers in my game. I created this library to make it easier to generate the perfect number for as many scenarios as possible. The library has almost complete test code coverage.
 
 ## API
 ```js
