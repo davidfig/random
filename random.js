@@ -360,7 +360,7 @@ class Random {
      */
     circle(x, y, radius, float) {
         const t = this.angle()
-        const u = this.get() + this.get()
+        const u = this.get(1, true) + this.get(1, true)
         const r = u > 1 ? 2 - u : u
         if (float) {
             return [x + r * Math.cos(t) * radius, y + r * Math.sin(t) * radius]

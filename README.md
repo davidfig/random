@@ -35,20 +35,20 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {string} [PRNG="alea"] - name of algorithm, see https://github.com/davidbau/seedrandom
      * @param {(boolean|string)} [state] - can include the state returned from save()
      */
-    seed(seed, options)
+    seed(seed, options) {
 
     /**
      * saves the state of the random generator
      * can only be used after Random.seed() is called with options.state = true
      * @returns {number} state
      */
-    save()
+    save() {
 
     /**
      * restores the state of the random generator
      * @param {number} state
      */
-    restore(state)
+    restore(state) {
 
     /**
      * changes the generator to use the old Math.sin-based random function
@@ -56,19 +56,19 @@ I use lots of random numbers in my game. I created this library to make it easie
      * (deprecated) Use only for compatibility purposes
      * @param {number} seed
      */
-    seedOld(seed)
+    seedOld(seed) {
 
     /**
      * create a separate random generator using the seed
      * @param {number} seed
      * @return {object}
      */
-    separateSeed(seed)
+    separateSeed(seed) {
 
     /**
      * resets the random number this.generator to Math.random()
      */
-    reset()
+    reset() {
 
     /**
      * returns a random number using the this.generator between [0, ceiling - 1]
@@ -76,13 +76,13 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {boolean} [useFloat=false]
      * @return {number}
      */
-    get(ceiling, useFloat)
+    get(ceiling, useFloat) {
 
     /**
      * returns a random integer between 0 - Number.MAX_SAFE_INTEGER
      * @return {number}
      */
-    getHuge()
+    getHuge() {
 
     /**
      * random number [middle - range, middle + range]
@@ -91,7 +91,7 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {boolean} [useFloat=false]
      * @return {number}
      */
-    middle(middle, delta, useFloat)
+    middle(middle, delta, useFloat) {
 
     /**
      * random number [start, end]
@@ -100,7 +100,7 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {boolean} [useFloat=false] if true, then range is (start, end)--i.e., not inclusive to start and end
      * @return {number}
      */
-    range(start, end, useFloat)
+    range(start, end, useFloat) {
 
     /**
      * an array of random numbers between [start, end]
@@ -110,7 +110,7 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {boolean} [useFloat=false]
      * @return {number[]}
      */
-    rangeMultiple(start, end, count, useFloat)
+    rangeMultiple(start, end, count, useFloat) {
 
     /**
      * an array of random numbers between [middle - range, middle + range]
@@ -120,26 +120,26 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {boolean} [useFloat=false]
      * @return {number[]}
      */
-    middleMultiple(middle, range, count, useFloat)
+    middleMultiple(middle, range, count, useFloat) {
 
     /**
      * @param {number} [chance=0.5]
      * returns random sign (either +1 or -1)
      * @return {number}
      */
-    sign(chance)
+    sign(chance) {
 
     /**
      * tells you whether a random chance was achieved
      * @param {number} [percent=0.5]
      * @return {boolean}
      */
-    chance(percent)
+    chance(percent) {
 
     /**
      * returns a random angle in radians [0 - 2 * Math.PI)
      */
-    angle()
+    angle() {
 
     /**
      * Shuffle array (either in place or copied)
@@ -148,14 +148,14 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {boolean} [copy=false] whether to shuffle in place (default) or return a new shuffled array
      * @return {Array} a shuffled array
      */
-    shuffle(array, copy)
+    shuffle(array, copy) {
 
     /**
      * picks a random element from an array
      * @param {Array} array
      * @return {*}
      */
-    pick(array, remove)
+    pick(array, remove) {
 
     /**
      * returns a random property from an object
@@ -163,7 +163,7 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {object} obj
      * @return {*}
      */
-    property(obj)
+    property(obj) {
 
     /**
      * creates a random set where each entry is a value between [min, max]
@@ -172,7 +172,7 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {number} amount of numbers in set
      * @param {number[]}
      */
-    set(min, max, amount)
+    set(min, max, amount) {
 
     /**
      * returns a set of numbers with a randomly even distribution (i.e., no overlapping and filling the space)
@@ -184,7 +184,7 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {boolean} [useFloat=false]
      * @param {number[]}
      */
-    distribution(start, end, count, includeStart, includeEnd, useFloat)
+    distribution(start, end, count, includeStart, includeEnd, useFloat) {
 
     /**
      * returns a random number based on weighted probability between [min, max]
@@ -194,7 +194,18 @@ I use lots of random numbers in my game. I created this library to make it easie
      * @param {number} target for average value
      * @param {number} stddev - standard deviation
      */
-    weightedProbabilityInt(min, max, target, stddev)
+    weightedProbabilityInt(min, max, target, stddev) {
+
+    /**
+     * returns a random number within a circle with a normal distribution
+     * from https://stackoverflow.com/a/5838055/1955997
+     * @param {number} x
+     * @param {number} y
+     * @param {number} radius
+     * @param {bool} [float]
+     * @returns {number[]} [x, y]
+     */
+    circle(x, y, radius, float) {
 
 ```
 ## License  
