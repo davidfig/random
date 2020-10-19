@@ -8,26 +8,22 @@ const count = 100
 describe('Random', () => {
     describe('get()', () => {
         it('returns a random integer between 0 and 9', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.get(10)).to.be.within(0, 9)
             }
         })
         it('returns a negative random integer between -100 and 0', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.get(-100)).to.be.within(-100, 0)
             }
         })
         it('returns a random float between 0 and 1', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.get(1, true)).to.be.within(0, 1)
             }
         })
         it('returns a random float between -10 and 0', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.get(-10, true)).to.be.within(-10, 0)
             }
         })
@@ -37,14 +33,12 @@ describe('Random', () => {
             const seed = Random.get(100000)
             Random.seed(seed)
             const first = []
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 first[i] = Random.get(1000)
             }
             Random.seed(seed)
             const second = []
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 second[i] = Random.get(1000)
             }
             expect(first).to.be.eql(second)
@@ -53,41 +47,35 @@ describe('Random', () => {
     })
     describe('middle()', () => {
         it('returns a random integer with -10 >= n >= 10', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.middle(0, 10)).to.be.within(-10, 10)
             }
         })
         it('returns a random float 25 away from 50', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.middle(50, 25, true)).to.be.within(25, 75)
             }
         })
         it('returns a random number between a negative a positive value', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.middle(25, 100)).to.be.within(-75, 125)
             }
         })
         it('returns a random number in a negative range', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.middle(-100, 20)).to.be.within(-120, -80)
             }
         })
     })
     describe('range()', () => {
         it('returns a random range in positive values', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.range(0, 100)).to.be.within(0, 100)
             }
         })
         it('returns all integers inclusively in a small range with zero', () => {
             let finds = []
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 finds[Random.range(0, 2)] = true
             }
             expect(finds[0]).to.be.equal(true)
@@ -97,8 +85,7 @@ describe('Random', () => {
         })
         it('returns all integers inclusively in a small range without zero', () => {
             let finds = []
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 finds[Random.range(1, 3)] = true
             }
             expect(finds[0]).to.be(undefined)
@@ -108,16 +95,14 @@ describe('Random', () => {
             expect(finds[4]).to.be(undefined)
         })
         it('returns all floats inclusively in a small range with zero', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 const n = Random.range(0, 3, true)
                 expect(n).to.be.within(0, 3)
             }
         })
         it('returns all negatives integers inclusively in a small range with zero', () => {
             let finds = {}
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 const n = Random.range(-1, 0)
                 finds[n] = true
                 expect(n).to.be.within(-1, 0)
@@ -128,8 +113,7 @@ describe('Random', () => {
             expect(finds[1]).to.be(undefined)
         })
         it('returns a huge number between 0 and MAX_SAFE_INTEGER', () => {
-            for (let i = 0; i < count; i++)
-            {
+            for (let i = 0; i < count; i++) {
                 expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER)
             }
         })
@@ -138,16 +122,14 @@ describe('Random', () => {
         it('time for Random.get() with Math.random()', function() {
             Random.reset()
             this.timeout(100000)
-            for (let i = 0; i < 10000; i++)
-            {
+            for (let i = 0; i < 10000; i++) {
                 expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER)
             }
         })
         it('time for Random.get() with davidbau/seedrandom/alea function', function() {
             Random.seed(1)
             this.timeout(100000)
-            for (let i = 0; i < 10000; i++)
-            {
+            for (let i = 0; i < 10000; i++) {
                 expect(Random.getHuge()).to.be.within(0, Number.MAX_SAFE_INTEGER)
             }
         })
@@ -167,33 +149,39 @@ describe('Random', () => {
             expect(newArray).not.eql(array)
         })
     })
-    describe('saved state test', () =>
-    {
-        it('using state to repeat random values', function ()
-        {
+    describe('saved state test', () => {
+        it('using state to repeat random values', function () {
             Random.reset()
             Random.seed(1, { state: true })
 
             // take 100 random values
-            for (let i = 0; i < 100; i++)
-            {
+            for (let i = 0; i < 100; i++) {
                 Random.getHuge()
             }
             const state = Random.save()
 
             // save 1000 random values
             const original = []
-            for (let i = 0; i < 1000; i++)
-            {
+            for (let i = 0; i < 1000; i++) {
                 original.push(Random.getHuge())
             }
             Random.restore(state)
             const test = []
-            for (let i = 0; i < 1000; i++)
-            {
+            for (let i = 0; i < 1000; i++) {
                 test.push(Random.getHuge())
             }
             expect(original).to.eql(test)
+        })
+    })
+    describe('circle test', () => {
+        it('generates random points within a circle', () => {
+            Random.reset()
+            for (let i = 0; i < count; i++) {
+                const p = Random.circle(100, 100, 300)
+                const dist = Math.sqrt(Math.pow(p[0] - 100, 2) + Math.pow(p[1] - 100, 2))
+                expect(dist).to.be.greaterThan(-1)
+                expect(dist).to.be.lessThan(300)
+            }
         })
     })
 })

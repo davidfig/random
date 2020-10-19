@@ -155,6 +155,7 @@ export declare class Random {
      */
     weightedProbabilityInt(min: any, max: any, target: any, stddev: any): number;
     color(): number;
+    circle(x: number, y: number, radius: number, float): number[];
 }
 declare const _default: Random;
 export default _default;
