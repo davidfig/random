@@ -1,6 +1,6 @@
 {
   "name": "yy-random",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "a javascript random number API with seeded number support",
   "main": "index.js",
   "scripts": {
