@@ -156,6 +156,13 @@ export declare class Random {
     weightedProbabilityInt(min: any, max: any, target: any, stddev: any): number;
     color(): number;
     circle(x: number, y: number, radius: number, float): number[];
+    /**
+     * select a random collection of elements from an array
+     * @param {Array} array
+     * @param {number} count
+     * @param {Array} array of selected items
+     */
+    select(array: Array, count: number): Array;
 }
 declare const _default: Random;
 export default _default;

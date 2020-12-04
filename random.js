@@ -260,7 +260,7 @@ class Random {
         const select = [...array]
         const selected = []
         for (let i = 0; i < count; i++) {
-            const index = this.get(selected.length)
+            const index = this.get(select.length)
             selected.push(...select.splice(index, 1))
         }
         return selected
