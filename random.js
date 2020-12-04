@@ -251,6 +251,22 @@ class Random {
     }
 
     /**
+     * select a random collection of elements from an array
+     * @param {Array} array
+     * @param {number} count
+     * @param {Array} array of selected items
+     */
+    select(array, count) {
+        const select = [...array]
+        const selected = []
+        for (let i = 0; i < count; i++) {
+            const index = this.get(selected.length)
+            selected.push(...select.splice(index, 1))
+        }
+        return selected
+    }
+
+    /**
      * returns a random property from an object
      * from http://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object
      * @param {object} obj

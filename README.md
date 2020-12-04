@@ -158,6 +158,14 @@ I use lots of random numbers in my game. I created this library to make it easie
     pick(array, remove) {
 
     /**
+     * select a random collection of elements from an array
+     * @param {Array} array
+     * @param {number} count
+     * @param {Array} array of selected items
+     */
+    select(array, count) {
+
+    /**
      * returns a random property from an object
      * from http://stackoverflow.com/questions/2532218/pick-random-property-from-a-javascript-object
      * @param {object} obj

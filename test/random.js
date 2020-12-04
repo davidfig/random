@@ -184,4 +184,17 @@ describe('Random', () => {
             }
         })
     })
+    describe('select test', () => {
+        it('randomly selected n unique items from an array', () => {
+            Random.reset()
+            const array = [1, 2, 3, 4, 5]
+            const items = Random.select(array, 3)
+            expect(items.length).to.equal(3)
+            for (let i = 0; i < items.length; i++) {
+                for (let j = i + 1; j < items.length; j++) {
+                    expect(items[i]).to.not.equal(items[j])
+                }
+            }
+        })
+    })
 })
