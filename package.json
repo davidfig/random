@@ -1,8 +1,9 @@
 {
   "name": "yy-random",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "description": "a javascript random number API with seeded number support",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "node_modules/.bin/mocha",
     "docs": "markdown-api README.md random.js",
