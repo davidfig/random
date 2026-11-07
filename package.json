@@ -1,12 +1,12 @@
 {
   "name": "yy-random",
-  "version": "1.10.2",
+  "version": "1.10.3",
   "description": "a javascript random number API with seeded number support",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "node_modules/.bin/mocha",
-    "docs": "markdown-api README.md random.js",
+    "docs": "node node_modules/markdown-api/markdown-api.js README.md random.js",
     "transpile": "babel random.js -o index.js --source-maps inline",
     "prepublishOnly": "npm run transpile && npm run docs"
   },
