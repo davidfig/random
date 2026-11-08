@@ -173,6 +173,51 @@ describe('Random', () => {
             expect(original).to.eql(test)
         })
     })
+    describe('middleMultiple()', () => {
+        it('returns count numbers, each within range / 2 of middle', () => {
+            const results = Random.middleMultiple(50, 20, 100)
+            expect(results.length).to.be(100)
+            for (const n of results) {
+                expect(n).to.be.within(40, 60)
+                expect(n % 1).to.be(0)
+            }
+        })
+        it('returns floats with useFloat', () => {
+            const results = Random.middleMultiple(0, 2, 100, true)
+            expect(results.some(n => n % 1 !== 0)).to.be(true)
+            for (const n of results) {
+                expect(n).to.be.within(-1, 1)
+            }
+        })
+    })
+
+    describe('weightedProbabilityInt()', () => {
+        it('returns integers within [min, max], clustered around target', () => {
+            const results = []
+            for (let i = 0; i < 2000; i++) {
+                results.push(Random.weightedProbabilityInt(0, 100, 30, 5))
+            }
+            for (const n of results) {
+                expect(n % 1).to.be(0)
+                expect(n).to.be.within(0, 100)
+            }
+            const near = results.filter(n => Math.abs(n - 30) <= 10).length
+            expect(near).to.be.greaterThan(1400)
+        })
+        it('repeats the same values with the same seed', () => {
+            const run = () => {
+                Random.seed('weighted')
+                const out = []
+                for (let i = 0; i < 50; i++) {
+                    out.push(Random.weightedProbabilityInt(0, 10, 5, 1))
+                }
+                Random.reset()
+                return out.join()
+            }
+            expect(run()).to.be(run())
+        })
+    })
+
     describe('circle test', () => {
         it('generates random points within a circle', () => {
             Random.reset()

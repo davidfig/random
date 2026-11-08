@@ -172,7 +172,7 @@ class Random {
     middleMultiple(middle, range, count, useFloat) {
         const array = []
         for (let i = 0; i < count; i++) {
-            array.push(middle(middle, range, useFloat))
+            array.push(this.middle(middle, range, useFloat))
         }
         return array
     }
@@ -341,7 +341,7 @@ class Random {
      * @param {number} stddev - standard deviation
      */
     weightedProbabilityInt(min, max, target, stddev) {
-        function normRand() {
+        const normRand = () => {
             let x1, x2, rad
             do {
                 x1 = 2 * this.get(1, true) - 1
@@ -353,9 +353,9 @@ class Random {
         }
 
         stddev = stddev || 1
-        if (Math.random() < 0.81546) {
+        if (this.get(1, true) < 0.81546) {
             while (true) {
-                const sample = ((normRand() * stddev) + target)
+                const sample = Math.round((normRand() * stddev) + target)
                 if (sample >= min && sample <= max) {
                     return sample
                 }
